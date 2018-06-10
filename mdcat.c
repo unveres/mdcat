@@ -6,7 +6,16 @@ FILE *in = NULL;
 
 int main(int argc, char **argv)
 {
-  int ch, i;
+  int    ch,
+         i;
+  size_t in_col,
+         in_row;
+
+  enum {
+    TEXT, TRIM
+  } mode;
+
+  (void)mode;
 
   if (in == NULL)
     in = stdin; 
@@ -31,8 +40,20 @@ int main(int argc, char **argv)
     return 0;
   }
 
-  while ((ch = fgetc(in)) != EOF)
-    putchar(ch);
+  in_col = 1;
+  in_row = 1;
+
+  while ((ch = fgetc(in)) != EOF) {
+    if (ch == '\n') {
+      in_col = 1;
+      ++in_row;
+    }
+
+    /* here it will be a lot of things to do */
+    /* putchar(ch); */
+
+    ++in_col;
+  }
 
   return 0;
 }
